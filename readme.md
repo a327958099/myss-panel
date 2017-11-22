@@ -7,68 +7,10 @@ MYSQL 5.5 （推荐5.6+）
 磁盘空间 10G+
 KVM
 
+注意：
 PHP必须开启gd、fileinfo组件
 
-小白建议使用LNMP傻瓜安装出php7.1 + mysql(5.5以上)
-手动编译请看WIKI [编译安装PHP7.1.7环境（CentOS）]
-使用LNMP部署时请到/usr/local/php/etc/php.ini下搜索disable_functions，把proc_开头的函数都删掉
-
-telegram频道：https://t.me/ssrpanel
-telegram群组：https://t.me/chatssrpanel
-本人未实名微信小号：dxstx77 （请勿任何转账、红包行为）
 ````
-
-## 演示站(已挂，求捐赠)
-````
-http://www.ssrpanel.com
-用户名：admin
-密码：123456
-````
-
-![VPS推荐](https://github.com/ssrpanel/ssrpanel/wiki/VPS%E6%8E%A8%E8%8D%90)
-````
-部署面板必须得用到VPS
-强烈推荐使用1G以上内存的KVM架构的VPS
-做节点则只需要256M+内存的KVM即可
-（节点强烈不建议使用OVZ，一无法加速二容易崩溃，512M以下内存的容易经常性宕机，即便是KVM）
-````
-
-#### 打赏作者
-````
-如果你觉得这套代码好用，微信扫一下进行打赏
-在使用过程中有发现问题就提issue，有空我会改的
-持续开发，喜欢请star一下，如果你发现什么好玩的东西，也请发到issue
-````
-![打赏作者](https://github.com/ssrpanel/ssrpanel/blob/master/public/assets/images/donate.jpeg?raw=true)
-
-### 打赏名单
-|昵称|金额|
-|:-------|--------:| 
-|Law-杰|￥10| 
-|Err| ￥51 | 
-|緃噺開始 |￥5| 
-|【要求匿名】|￥267|
-|、无奈|￥5|
-|Sunny Woon|￥10|
-|aazzpp678|￥26|
-|风云_1688|￥15|
-|Royal|￥25|
-|bingo|￥8|
-|Eason|￥10|
-|【要求匿名】|￥130|
-|暮风|￥20|
-|huigeer|￥10|
-|真想悠哉|￥88|
-|osmond|￥10|
-
-
-这些捐赠的用途：
-- 1.30刀买了1台VPS做开发测试用（已被BAN）
-- 2.30刀买了一个Beyond Compare 4 Standard的正版激活码
-- 3.感谢`izhangxm`提交了自定义等级的分支代码
-- 4.感谢`Hao-Luo`提供的节点一键部署脚本
-
-
 #### 拉取代码
 ````
 cd /home/wwwroot/
@@ -78,23 +20,7 @@ git clone https://github.com/ssrpanel/ssrpanel.git
 #### 先配置数据库
 ````
 mysql 创建一个数据库，然后自行导入sql\db.sql
-config\database.php 中的mysql选项自行配置数据库
-````
-
-#### 配置一下
-````
-cd ssrpanel/
-php composer.phar install
-php artisan key:generate
-chown -R www:www storage/
-chmod -R 777 storage/
-````
-
-#### NGINX配置文件加入
-````
-location / {
-    try_files $uri $uri/ /index.php$is_args$args;
-}
+config\database.php 中的mysql选项自行配置数据库信息
 ````
 
 #### 编辑php.ini
@@ -104,6 +30,24 @@ vim /usr/local/php/etc/php.ini
 
 搜索disable_function
 删除proc_开头的所有函数
+````
+
+
+#### NGINX配置文件加入
+````
+root /data/wwwroot/default/ssrpanel/public; #站点地址路径，注意：必须是ssrpanel/public目录
+location / {
+    try_files $uri $uri/ /index.php$is_args$args;
+}
+````
+
+#### 配置一下
+````
+cd ssrpanel/
+php composer.phar install #安装依赖
+php artisan key:generate
+chown -R www:www storage/
+chmod -R 777 storage/
 ````
 
 #### 出现500错误
