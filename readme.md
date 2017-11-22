@@ -36,15 +36,21 @@ vim /usr/local/php/etc/php.ini
 #### NGINX配置文件加入
 ````
 root /data/wwwroot/default/ssrpanel/public; #站点地址路径，注意：必须是ssrpanel/public目录
+#server内部加入以下代码：
 location / {
     try_files $uri $uri/ /index.php$is_args$args;
 }
+````
+#### 重启NGINX和PHP-FPM
+````
+service nginx restart
+service php-fpm restart
 ````
 
 #### 配置一下
 ````
 cd ssrpanel/
-php composer.phar install #安装依赖
+php composer.phar install  #安装依赖
 php artisan key:generate
 chown -R www:www storage/
 chmod -R 777 storage/
@@ -57,15 +63,9 @@ chmod -R 777 storage/
 修改完记得重启NGINX和PHP-FPM
 ````
 
-#### 重启NGINX和PHP-FPM
-````
-service nginx restart
-service php-fpm restart
-````
-
 ## 定时任务（所有自动发邮件的地方都要用到，所以请务必配置）
 ````
-编辑crontab
+**编辑crontab**
 crontab -e
 
 然后加入如下（请自行修改ssrpanel路径）
@@ -98,8 +98,18 @@ sh initcfg.sh
 把 user-config.json 里的 connect_verbose_info 设置为 1
 配置 usermysql.json 里的数据库链接，NODE_ID就是节点ID，对应面板后台里添加的节点的自增ID，所以请先把面板搭好，搭好后进后台添加节点
 ````
+###### SSR服务端配置
 
-###### 一键自动部署
+````
+
+````
+
+## 网卡流量监控一键脚本
+````
+wget -N --no-check-certificate https://raw.githubusercontent.com/ssrpanel/ssrpanel/master/server/deploy_vnstat.sh;chmod +x deploy_vnstat.sh;./deploy_vnstat.sh
+````
+
+###### SSR服务端一键自动部署
 ````
 wget -N --no-check-certificate https://raw.githubusercontent.com/ssrpanel/ssrpanel/master/server/deploy_ssr.sh;chmod +x deploy_ssr.sh;./deploy_ssr.sh
 ````
@@ -110,11 +120,6 @@ chmod a+x update.sh && sh update.sh
 
 如果每次更新都会出现数据库文件被覆盖
 请先执行一次 chmod a+x fix_git.sh && sh fix_git.sh
-````
-
-## 网卡流量监控一键脚本
-````
-wget -N --no-check-certificate https://raw.githubusercontent.com/ssrpanel/ssrpanel/master/server/deploy_vnstat.sh;chmod +x deploy_vnstat.sh;./deploy_vnstat.sh
 ````
 
 ## 单端口多用户
