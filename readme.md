@@ -36,6 +36,7 @@ vim /usr/local/php/etc/php.ini
 #### NGINX配置文件加入
 ````
 root /data/wwwroot/default/ssrpanel/public; #站点地址路径，注意：必须是ssrpanel/public目录
+
 #server内部加入以下代码：
 location / {
     try_files $uri $uri/ /index.php$is_args$args;
@@ -96,13 +97,94 @@ cd shadowsocksr
 sh initcfg.sh
 把 userapiconfig.py 里的 API_INTERFACE 设置为 glzjinmod
 把 user-config.json 里的 connect_verbose_info 设置为 1
-配置 usermysql.json 里的数据库链接，NODE_ID就是节点ID，对应面板后台里添加的节点的自增ID，所以请先把面板搭好，搭好后进后台添加节点
 ````
-###### SSR服务端配置
+###### 安装依赖(cymysql)
+````
+./setup_cymysql.sh
+````
+###### 初始化配置
+````
+./initcfg.sh
+````
+###### SSR服务端usermysql.json配置
 
 ````
+{
+    "host": "112.74.102.56", //数据库地址
+    "port": 3306, //端口
+    "user": "wangfei", //用户名
+    "password": "7DMKneljBW", //密码
+    "db": "ss2", //数据库名
+    "node_id": 1, //NODE_ID就是节点ID，对应ss_node里面的ID
+    "transfer_mul": 1.0,
+    "ssl_enable": 0,
+    "ssl_ca": "",
+    "ssl_cert": "",
+    "ssl_key": ""
+}
+````
+###### SSR服务端user-config.json配置
 
 ````
+{
+    "server": "192.168.31.253",
+    "server_ipv6": "::",
+    "server_port": 8388,
+    "local_address": "127.0.0.1",
+    "local_port": 1080,
+    "password": "m",
+    "method": "aes-128-ctr",  #加密方式
+    "protocol": "auth_chain_a", #认证协议，强烈推荐auth_chain_a// 例如 auth_aes128_md5 或者 auth_aes128_sha1，目前只有这两种
+    "protocol_param": "", #协议参数：每个端口最大设备连接数（建议最少2个），比如 限制最大 5个设备同时链接，那么改为："protocol_param": "5",协议为原版origin协议或其他协议兼容原版协议时无效
+    "obfs": "tls1.2_ticket_auth", #混淆插件，强烈推荐tls1.2_ticket_auth
+    "obfs_param": "",
+    "speed_limit_per_con": 0, #单线程限速
+    "speed_limit_per_user": 0, #端口总限速
+
+    "additional_ports" : {}, // only works under multi-user mode
+    "additional_ports_only" : false, // only works under multi-user mode
+    "timeout": 120,
+    "udp_timeout": 60,
+    "dns_ipv6": false,
+    "connect_verbose_info": 1,
+    "redirect": "",
+    "fast_open": false
+}
+````
+###### SSR服务端限制设备连接数
+限制设备连接数的这个功能，很早就有了，就是修改协议参数： protocol_param
+找到协议参数（参数为空 "" 时，默认限制 64个设备数）
+
+```
+"protocol_param": "",
+```
+在协议参数中设置你要限制 每个端口最大设备连接数（建议最少2个），比如 限制最大 5个设备同时链接，那么改为：
+
+```
+"protocol_param": "5",
+//注意：协议参数仅在服务端 协议设置(protocol)为 非原版(origin)协议并不兼容原版(_compatible) 时才有效！
+```
+如果你服务端 协议设置(protocol)的是 原版(origin) 时，设备数限制无效。
+
+如果你服务端 协议设置(protocol)的是 协议兼容原版 ，那么当用户使用原版协议(origin)连接Shadowsocks账号时，设备数限制无效。
+
+###### SSR服务端限制端口速度
+新增的两个参数分别是（参数为 0 时，默认代表不限速）：
+
+```
+"speed_limit_per_con": 0,
+"speed_limit_per_user": 0,
+```
+单位是 KB/S ，也就是我们平时下载文件的速度单位，我们家庭宽带100兆就是： 100Mbps / 8 = 12.5MB/S * 1024 =12800KB/S 。
+比如我们要设置 单线程限速 1MB/S ，端口总限速 3MB/S ，那么就这样写：
+
+```
+"speed_limit_per_con": 1024,
+"speed_limit_per_user": 3072,
+//speed_limit_per_con 指的是，单线程限速。
+//speed_limit_per_user 指的是，端口总限速。
+```
+
 
 ## 网卡流量监控一键脚本
 ````
