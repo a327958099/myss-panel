@@ -179,6 +179,28 @@ python server.py
 ./stop.sh
 ```
 注：通过脚本运行默认日志会保存在根目录的ssserver.log，可手动查看。
+
+###### 开机启动
+首先设置开机启动文件的权限，并打开该文件。
+
+**Centos系统：**
+
+```
+chmod +x /etc/rc.d/rc.local
+vi /etc/rc.d/rc.local
+```
+**Ubuntu/Debian系统：**
+
+```
+chmod +x /etc/rc.local
+vi /etc/rc.local
+```
+然后在 exit 0 这一句代码（只有ubuntu/debian有这个 exit 0）的前面加上 下面这句代码
+
+```
+bash /root/shadowsocksr/run.sh
+```
+
 ###### SSR服务端限制设备连接数
 限制设备连接数的这个功能，很早就有了，就是修改协议参数： protocol_param
 找到协议参数（参数为空 "" 时，默认限制 64个设备数）
