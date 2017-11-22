@@ -322,6 +322,23 @@ vim user-config.json
 14.支持单端口多用户
 15.账号、节点24小时和近30天内的流量监控
 ````
+**修改服务器的最大连接数**
+
+如果运行一段时间后，你发现服务器无法连接，同时ssh连上去后，执行
+
+```
+netstat -ltnap | grep -c CLOSE_WAIT
+```
+显示的数值很大（超过50是严重不正常），那么请修改服务器的最大连接数
+
+```
+//ubuntu/centos
+vim /etc/security/limits.conf
+//添加两行
+
+* soft nofile 32768
+* hard nofile 131072
+```
 
 ## 预览（这个是第一版的预览，已过时）
 ![Markdown](http://i4.bvimg.com/1949/aac73bf589fbd785.png)
