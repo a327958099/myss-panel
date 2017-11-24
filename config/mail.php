@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => 'smtp.exmail.qq.com',
+    'host' => 'smtp.mailgun.org',
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'xxx@qq.com',
-        'name' => '重置密码',
+        'address' => 'postmaster@colasj.com',
+        'name' => '可乐数据',
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => 'xxx@qq.com',
+    'username' => 'postmaster@colasj.com',
 
-    'password' => 'xxxxxx',
+    'password' => '03ba239bd5e60cd6af9de603f69718a4',
 
     /*
     |--------------------------------------------------------------------------
