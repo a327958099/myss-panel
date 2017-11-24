@@ -86,7 +86,7 @@ return [
 
     'username' => 'postmaster@colasj.com',
 
-    'password' => '03ba239bd5e60cd6af9de603f69718a4',
+    'password' => '密码',
 
     /*
     |--------------------------------------------------------------------------
