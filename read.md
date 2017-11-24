@@ -14,6 +14,8 @@ PHP必须开启gd、fileinfo组件
 #### 拉取代码
 ````
 cd /home/wwwroot/
+git clone https://github.com/a327958099/myssrserver.git
+//#地址二
 git clone https://github.com/ssrpanel/ssrpanel.git
 ````
 
