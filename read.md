@@ -114,8 +114,8 @@ sh initcfg.sh
 {
     "host": "112.74.102.56", //数据库地址
     "port": 3306, //端口
-    "user": "wangfei", //用户名
-    "password": "7DMKneljBW", //密码
+    "user": "user", //用户名
+    "password": "password", //密码
     "db": "ss2", //数据库名
     "node_id": 1, //NODE_ID就是节点ID，对应ss_node里面的ID
     "transfer_mul": 1.0,
