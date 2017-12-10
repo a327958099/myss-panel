@@ -112,7 +112,7 @@ sh initcfg.sh
 
 ````
 {
-    "host": "112.74.102.56", //数据库地址
+    "host": "127.0.0.1", //数据库地址
     "port": 3306, //端口
     "user": "user", //用户名
     "password": "password", //密码
