@@ -13,6 +13,8 @@ PHP必须开启gd、fileinfo组件
 ````
 #### 拉取代码
 ````
+yum install git //centos 安装git
+apt-get install git //Debian/Ubuntu安装git
 cd /home/wwwroot/
 git clone https://github.com/a327958099/myssrserver.git
 //#地址二
