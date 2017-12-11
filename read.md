@@ -14,11 +14,14 @@ PHP必须开启gd、fileinfo组件
 #### 拉取代码
 ````
 yum install git //centos 安装git
-apt-get install git //Debian/Ubuntu安装git
+yum install wget //centos 安装wget
+yum install unzip //centos 安装unzip
+
 cd /home/wwwroot/
 git clone https://github.com/a327958099/myssrserver.git
 //#地址二
 git clone https://github.com/ssrpanel/ssrpanel.git
+
 //wget下载
 wget http://www.colasj.com/upload/ssr-3.4.0.zip
 ````
