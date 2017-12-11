@@ -19,6 +19,8 @@ cd /home/wwwroot/
 git clone https://github.com/a327958099/myssrserver.git
 //#地址二
 git clone https://github.com/ssrpanel/ssrpanel.git
+//wget下载
+wget http://www.colasj.com/upload/ssr-3.4.0.zip
 ````
 
 #### 先配置数据库
