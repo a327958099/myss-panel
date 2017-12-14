@@ -381,6 +381,7 @@ vim /etc/security/limits.conf
 ```
 禁用IPV6
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
+
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
 ## 预览（这个是第一版的预览，已过时）
