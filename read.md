@@ -8,7 +8,7 @@ MYSQL 5.5 （推荐5.6+）
 KVM
 
 注意：
-PHP必须开启gd、fileinfo组件
+PHP必须开启curl、gd、fileinfo、openssl组件
 
 ````
 #### 拉取代码
@@ -379,11 +379,29 @@ vim /etc/security/limits.conf
 * soft nofile 32768
 * hard nofile 131072
 ```
+### Google
 禁用IPV6
 
 ```
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
+```
+修改root密码并启用root ssh登录
+```
+sudo passwd //修改root密码
+sudo -i //切换到root权限
+
+vi /etc/ssh/sshd_config
+#修改以下内容即可
+ 
+#允许密码登录 将注释去掉，改成yes
+PermitRootLogin yes
+ 
+#修改成 yes
+PasswordAuthentication yes
+ 
+#重启SSH即可
+service sshd restart
 ```
 
 ## 预览（这个是第一版的预览，已过时）
