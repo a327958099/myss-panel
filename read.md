@@ -379,6 +379,9 @@ vim /etc/security/limits.conf
 * soft nofile 32768
 * hard nofile 131072
 ```
+禁用IPV6
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
 ## 预览（这个是第一版的预览，已过时）
 ![Markdown](http://i4.bvimg.com/1949/aac73bf589fbd785.png)
