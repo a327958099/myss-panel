@@ -379,39 +379,17 @@ vim /etc/security/limits.conf
 * soft nofile 32768
 * hard nofile 131072
 ```
-### Google
-禁用IPV6
+
+### 修改时区
+```
+// 推荐方法
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+// centos7参数
+timedatectl //查看系统时间方面的各种状态
+timedatectl list-timezones //列出所有时区
+timedatectl set-local-rtc 1 //将硬件时钟调整为与本地时钟一致, 0 为设置为 UTC 时间
+timedatectl set-timezone Asia/Shanghai //设置系统时区为上海(各版本可能不兼容)
+
 
 ```
-sysctl -w net.ipv6.conf.all.disable_ipv6=1
-sysctl -w net.ipv6.conf.default.disable_ipv6=1
-```
-修改root密码并启用root ssh登录
-```
-sudo passwd //修改root密码
-sudo -i //切换到root权限
-
-vi /etc/ssh/sshd_config
-#修改以下内容即可
- 
-#允许密码登录 将注释去掉，改成yes
-PermitRootLogin yes
- 
-#修改成 yes
-PasswordAuthentication yes
- 
-#重启SSH即可
-service sshd restart
-```
-
-## 预览（这个是第一版的预览，已过时）
-![Markdown](http://i4.bvimg.com/1949/aac73bf589fbd785.png)
-![Markdown](http://i4.bvimg.com/1949/a7c21b7504805130.png)
-![Markdown](http://i4.bvimg.com/1949/ee4e72cab0deb8b0.png)
-![Markdown](http://i4.bvimg.com/1949/ee21b577359a638a.png)
-![Markdown](http://i1.ciimg.com/1949/6741b88c5a02d550.png)
-![Markdown](http://i1.ciimg.com/1949/a12612d57fdaa001.png)
-![Markdown](http://i1.ciimg.com/1949/c5c80818393d585e.png)
-![Markdown](http://i1.ciimg.com/1949/c52861d84ed70039.png)
-![Markdown](http://i1.ciimg.com/1949/83354a1cd7fbd041.png)
-![Markdown](http://i1.bvimg.com/1949/13b6e4713a6d29c2.png)
