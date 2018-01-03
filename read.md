@@ -393,3 +393,6 @@ timedatectl set-timezone Asia/Shanghai //设置系统时区为上海(各版本�
 
 
 ```
+搬瓦工修改SSH端口
+vi /etc/ssh/sshd_config
+搜索 Port 修改即可
